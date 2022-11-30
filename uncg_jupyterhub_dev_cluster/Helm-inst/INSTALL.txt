@@ -1,0 +1,9 @@
+How to install and update Helm for package management
+o - Download binary from [here](https://github.com/helm/helm/releases)
+o - verify the checksum opf the archive
+o - unpack the archive and extract the binary
+o - set the path to the binary in ~/.bashrc and source it
+o - you are done installing.
+
+How to migrate from helm v2 to helm v3. Follow the directions [here](
+https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/)
