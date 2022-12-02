@@ -3,6 +3,10 @@
 # The build image is then named and taged
 # Renamed and tagged images are pull to repository
 # User must be log in to their repository
+#
+# CC Jacob Fosso Tande 2022-11-22
+######################
+
 
 # Build then name and tag image
 DOCKERFILE=$1

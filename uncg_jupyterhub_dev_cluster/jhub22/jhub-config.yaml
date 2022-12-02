@@ -14,20 +14,21 @@ singleuser:
   image:
     name: jtandedocker/min-nbk
     tag: py-3.10.6-nbpuller
+#    pullPolicy: Always
   profileList:
-    - display_name: "Minimal environment with python"
-      description: "To avoid too much bells and whistles: Python."
+    - display_name: "Minimal Environment"
+      description: "Jupyter Notebook with Python."
       default: true
-    - display_name: "Datascience environment (python,R, and Julia)"
-      description: "If you want the additional bells and whistles: Python, R, and Julia."
+    - display_name: "Datascience Environment"
+      description: "SciPython, R, and Julia."
       kubespawner_override:
         image: jtandedocker/datascience-nbk:py-3.10.6-nbpuller
-    - display_name: "Spark environment"
-      description: "The Jupyter Stacks spark image!"
+    - display_name: "All Spark Environment"
+      description: "Python, Scala, R, Spark Stack"
       kubespawner_override:
         image: jtandedocker/allspark-nbk:py-3.10.6-nbpuller
-    - display_name: "Deeplearning with TensorFlow"
-      description: "Datascience Environment with Sample Notebooks"
+    - display_name: "Jupyter Notebook Deep Learning Stack"
+      description: "Tensorflow"
       kubespawner_override:
         image: jtandedocker/tensorflow-nbk:py-3.10.6-nbpuller
         lifecycleHooks:
@@ -38,7 +39,7 @@ singleuser:
                   "gitpuller",
                   "https://github.com/jtande/jhub-file-download",
                   "SampleNoteBooks",
-                  "SampleNoteBooks", 
+                  "Examples", 
                 ]
   # `cmd: null` allows the custom CMD of the Jupyter docker-stacks to be used
   # which performs further customization on startup.
@@ -49,13 +50,28 @@ singleuser:
   extraEnv:
     JUPYTERHUB_SINGLEUSER_APP: "jupyter_server.serverapp.ServerApp"
     EDITOR: "vim"
-#  lifecycle_hooks:
-#    postStart:
-#      exec:
-#       command:
-#         - "sh"
-#         - "-c"
-#         - >
-#           gitpuller https://github.com/jtande/jhub-file-download SampleNoteBooks SampleNoteBooks;
+  memory:
+    limit: 1G
+#    guarantee: 1G
+  cpu:
+    limit: .5
+    guarantee: .5
+  storage:
+    capacity: 4Gi   
 
-
+######### Define the hub  ################
+hub:
+  config:
+    Authenticator:
+      admin_users:
+        - j_fossot
+#        - adminuser2
+    GoogleOAuthenticator:
+      client_id: your-client-id.apps.googleusercontent.com
+      client_secret: your-client-secret
+      oauth_callback_url: https://your-jupyterhub-domain/hub/oauth_callback
+      hosted_domain:
+        - uncg.edu
+      login_service: iSPARTAN
+    JupyterHub:
+      authenticator_class: google
