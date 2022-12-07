@@ -1,0 +1,420 @@
+{% extends "page.html" %}
+{% if announcement_login is string %}
+  {% set announcement = announcement_login %}
+{% endif %}
+
+{% block login_widget %}
+{% endblock %}
+
+{% block main %}
+
+{% block login %}
+<div id="login-main" class="container">
+{% block login_container %}
+{% if custom_html %}
+{{ custom_html | safe }}
+{% elif login_service %}
+<!-- Start customization here -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+    box-sizing: border-box;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+.header {
+    background-color: #000033;
+    <!--background-color: #F37524;-->
+    color: #ffffff;
+    padding: 15px;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    padding: 8px;
+    margin-bottom: 7px;
+    <!-- background-color: #33b5e5; -->
+    background-color: #FFDF00;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.menu li:hover {
+    background-color: #FFDF00;
+    <!--background-color: #0099cc; -->
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <!--<h1>JupyterHub @ UNC-Greensboro</h1> -->
+<a href="https://imgur.com/Jr5ZiSh"><img src="https://i.imgur.com/Jr5ZiSh.png" hight="50" title="source: imgur.com" /></a>
+ <!--  <img src="uncgreensboro_v_tag_3-color.png" width="200"/> -->
+</div>
+
+<div class="row">
+
+ <div class="col-3"> <!-- login cell -->
+<!-- end first chunk here -->
+<div class="service-login">
+  <p id='insecure-login-warning' class='hidden'>
+  Warning: JupyterHub seems to be served over an unsecured HTTP connection.
+  We strongly recommend enabling HTTPS for JupyterHub.
+  </p>
+
+  <a role="button" class='btn btn-jupyter btn-lg' href='{{authenticator_login_url}}'>
+    Sign in with {{login_service}}
+  </a>
+</div>
+<!-- Start second chunk here -->
+</div> <!-- cell -->
+
+<div class="col-9">
+  <H2>Welcome to the UNCG JupyterHub!</H2>
+
+  <p> Login to JupyterHub using your iSpartan ID. If you would
+    need assistance, please visit <a href="https://uncg.service-now.com/support">6-TECH Online</a> to open a request.</p>
+
+  <H3>Useful Links</H3>
+
+  <ul>
+    <li><a href="https://jupyterlab.readthedocs.io/en/latest/">JupyterLab users manual</a></li>
+    <li><a href="https://jupyter.org/documentation">Learn more about the Jupyter project</a></li>
+    <li><a href="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks">A gallery of interesting Jupyter Notebooks</a></li>
+  </ul>
+
+  <h3>News</h3>
+
+  <ul>
+    <li>New JupyterHub running on Kubernete cluster configured and operational!</li>
+  </ul>
+  
+  <H3>Courses that have used JupyterHub</H3>
+  
+  <ul>
+    <li><b>2020-2021</b></li>
+    <ul>
+      <!--
+      <li><a href="/services/public/dblank/CS110%20Intro%20to%20Computing/2017-Fall/Syllabus.ipynb">CS110: Introduction to Computing, Fall 2017</a></li>
+      <li><a href="/services/public/dblank/CS240%20Computer%20Organization/2017-Fall/Syllabus.ipynb">CS240: Principles of Computer Organization, Fall 2017</a></li>
+      -->
+      </ul>
+    <li><b>2019-2020</b></li>
+    <ul>
+      <!--
+      <li><a href="/services/public/dblank/CS110%20Intro%20to%20Computing/2017-Spring/Syllabus.ipynb">CS110: Introduction to Computing, Spring 2017</a></li>
+      <li><a href="/services/public/dblank/CS206%20Data%20Structures/2017-Spring/Syllabus.ipynb">CS206: Data Structures, Spring 2017</a></li>
+      <li><a href="/services/public/dblank/CS245%20Programming%20Languages/2016-Fall/Syllabus.ipynb">CS245: Principles of Programming Languages, Fall 2016</a></li>
+      <li><a href="/services/public/dblank/CS371%20Cognitive%20Science/2016-Fall/Syllabus.ipynb">CS371: Introduction to Cognitive Science, Fall 2016</a>
+	-->
+      </ul>
+  </ul>
+
+  <H3>Administration</H3>
+  <ul>
+    <li><p>To use JupyterHub, in your course, please visit
+	<a href="https://uncg.service-now.com/support">6-TECH Online</a> to open a request.
+      </p>
+    </li>
+    <li><p>UNCG JupyterHub is a <a href="https://cci-lab.uncg.edu/about-the-cci-lab/">CCI Lab project.</a>
+      </p>
+    </li>
+    <li><p>Are you a student interested in working on the project? Make a request at<a href="https://uncg.service-now.com/support"> 6-TECH Online</a>  
+      </p>
+    </li>
+  </ul>
+
+<p>Funding, for equipment and development, provided by:</p>
+
+<table>
+<tr>
+  <!-- <td bgcolor="#0000FF"> -->
+  <td bgcolor="#000033">
+    <a href="https://imgur.com/K8RsDH9"><img src="https://i.imgur.com/K8RsDH9.jpg" title="source: imgur.com" /></a>
+   <!-- <a href="https://its.uncg.edu/"><img src="uncg_its_logo.jpg" width="200"/></a> -->
+  </td>
+  <!--
+  <td>
+    <a href="https://www.aacu.org/tides"><img src="http://athena.brynmawr.edu/images/helmsley-logo.jpg" height="100"/></a>
+  </td>
+  -->
+</tr>
+</table>
+</div> <!-- 2nd column -->
+</div> <!-- row -->
+</body>
+</html>
+
+<!-- End second chunk here -->
+
+{% else %}
+
+<!-- start second chunk of customization here -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+    box-sizing: border-box;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+.header {
+    background-color: #000033;
+    <!--background-color: #F37524;-->
+    color: #ffffff;
+    padding: 15px;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    padding: 8px;
+    margin-bottom: 7px;
+    <!-- background-color: #33b5e5; -->
+    background-color: #FFDF00;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.menu li:hover {
+    background-color: #FFDF00;
+    <!--background-color: #0099cc; -->
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <!--<h1>JupyterHub @ UNC-Greensboro</h1> -->
+<a href="https://imgur.com/Jr5ZiSh"><img src="https://i.imgur.com/Jr5ZiSh.png" hight="50" title="source: imgur.com" /></a>
+ <!--  <img src="uncgreensboro_v_tag_3-color.png" width="200"/> -->
+</div>
+
+<div class="row">
+
+  <div class="col-3"> <!-- login cell -->
+
+<!-- end 1st instance of second chunk of customization here -->
+
+<form action="{{authenticator_login_url}}" method="post" role="form">
+  <div class="auth-form-header">
+    Sign in
+  </div>
+  <div class='auth-form-body'>
+
+    <p id='insecure-login-warning' class='hidden'>
+    Warning: JupyterHub seems to be served over an unsecured HTTP connection.
+    We strongly recommend enabling HTTPS for JupyterHub.
+    </p>
+
+    {% if login_error %}
+    <p class="login_error">
+      {{login_error}}
+    </p>
+    {% endif %}
+    <label for="username_input">Username:</label>
+    <input
+      id="username_input"
+      type="text"
+      autocapitalize="off"
+      autocorrect="off"
+      autocomplete="username"
+      class="form-control"
+      name="username"
+      val="{{username}}"
+      tabindex="1"
+      autofocus="autofocus"
+    />
+    <label for='password_input'>Password:</label>
+    <input
+      type="password"
+      class="form-control"
+      autocomplete="current-password"
+      name="password"
+      id="password_input"
+      tabindex="2"
+    />
+
+    <div class="feedback-container">
+      <input
+        id="login_submit"
+        type="submit"
+        class='btn btn-jupyter'
+        value='Sign in'
+        tabindex="3"
+        />
+      <div class="feedback-widget hidden">
+        <i class="fa fa-spinner"></i>
+      </div>
+    </div>
+
+    {% block login_terms %}
+    {% if login_term_url %}
+    <div id="login_terms" class="login_terms">
+    <input type="checkbox" id="login_terms_checkbox" name="login_terms_checkbox" required />
+    {% block login_terms_text %} {# allow overriding the text #}
+    By logging into the platform you accept the <a href="{{ login_term_url }}">terms and conditions</a>.
+    {% endblock login_terms_text %}
+    </div>
+    {% endif %}
+    {% endblock login_terms %}
+
+  </div>
+</form>
+</div> <!-- cell -->
+
+<div class="col-9">
+  <H2>Welcome to the UNCG JupyterHub!</H2>
+
+  <p> Login to JupyterHub using your iSpartan ID. If you would
+    need assistance, please visit <a href="https://uncg.service-now.com/support">6-TECH Online</a> to open a request.</p>
+
+  <H3>Useful Links</H3>
+
+  <ul>
+    <li><a href="https://jupyterlab.readthedocs.io/en/latest/">JupyterLab users manual</a></li>
+     <li><a href="https://jupyter.org/documentation">Learn more about the Jupyter project</a></li>
+  </ul>
+
+  <h3>News</h3>
+
+  <ul>
+    <li>New JupyterHub running on Kubernete cluster configured and operational!</li>
+  </ul>
+  
+  <H3>Courses that have used JupyterHub</H3>
+  
+  <ul>
+    <li><b>2020-2021</b></li>
+    <ul>
+      <!--
+      <li><a href="/services/public/dblank/CS110%20Intro%20to%20Computing/2017-Fall/Syllabus.ipynb">CS110: Introduction to Computing, Fall 2017</a></li>
+      <li><a href="/services/public/dblank/CS240%20Computer%20Organization/2017-Fall/Syllabus.ipynb">CS240: Principles of Computer Organization, Fall 2017</a></li>
+      -->
+      </ul>
+    <li><b>2019-2020</b></li>
+    <ul>
+      <!--
+      <li><a href="/services/public/dblank/CS110%20Intro%20to%20Computing/2017-Spring/Syllabus.ipynb">CS110: Introduction to Computing, Spring 2017</a></li>
+      <li><a href="/services/public/dblank/CS206%20Data%20Structures/2017-Spring/Syllabus.ipynb">CS206: Data Structures, Spring 2017</a></li>
+      <li><a href="/services/public/dblank/CS245%20Programming%20Languages/2016-Fall/Syllabus.ipynb">CS245: Principles of Programming Languages, Fall 2016</a></li>
+      <li><a href="/services/public/dblank/CS371%20Cognitive%20Science/2016-Fall/Syllabus.ipynb">CS371: Introduction to Cognitive Science, Fall 2016</a>
+	-->
+      </ul>
+  </ul>
+
+  <H3>Administration</H3>
+  <ul>
+    <li><p>To use JupyterHub, in your course, please visit
+	<a href="https://uncg.service-now.com/support">6-TECH Online</a> to open a request.
+      </p>
+    </li>
+    <li><p>UNCG JupyterHub is a <a href="https://cci-lab.uncg.edu/about-the-cci-lab/">CCI Lab project.</a>
+      </p>
+    </li>
+    <li><p>Are you a student interested in working on the project? Make a request at<a href="https://uncg.service-now.com/support"> 6-TECH Online</a>  
+      </p>
+    </li>
+  </ul>
+
+<p>Funding, for equipment and development, provided by:</p>
+
+<table>
+<tr>
+  <!-- <td bgcolor="#0000FF"> -->
+  <td bgcolor="#000033">
+    <a href="https://its.uncg.edu/"><img src="https://i.imgur.com/K8RsDH9.jpg" title="source: imgur.com" /></a>
+   <!-- <a href="https://its.uncg.edu/"><img src="uncg_its_logo.jpg" width="200"/></a> -->
+  </td>
+  <!--
+  <td>
+    <a href="https://www.aacu.org/tides"><img src="http://athena.brynmawr.edu/images/helmsley-logo.jpg" height="100"/></a>
+  </td>
+  -->
+</tr>
+</table>
+  
+</div>
+
+</div> <!-- row -->
+</body>
+</html>
+
+<!-- end 2nd instance of second chunk of customization here -->
+{% endif %}
+{% endblock login_container %}
+</div>
+{% endblock login %}
+
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+if (window.location.protocol === "http:") {
+  // unhide http warning
+  var warning = document.getElementById('insecure-login-warning');
+  warning.className = warning.className.replace(/\bhidden\b/, '');
+}
+// setup onSubmit feedback
+$('form').submit((e) => {
+  var form = $(e.target);
+  form.find('.feedback-container>input').attr('disabled', true);
+  form.find('.feedback-container>*').toggleClass('hidden');
+  form.find('.feedback-widget>*').toggleClass('fa-pulse');
+});
+</script>
+{% endblock %}

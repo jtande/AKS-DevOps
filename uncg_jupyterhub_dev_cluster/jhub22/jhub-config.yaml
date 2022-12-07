@@ -14,7 +14,7 @@ singleuser:
   image:
     name: jtandedocker/min-nbk
     tag: py-3.10.6-nbpuller
-#    pullPolicy: Always
+    pullPolicy: Always
   profileList:
     - display_name: "Minimal Environment"
       description: "Jupyter Notebook with Python."
@@ -23,24 +23,27 @@ singleuser:
       description: "SciPython, R, and Julia."
       kubespawner_override:
         image: jtandedocker/datascience-nbk:py-3.10.6-nbpuller
+        pullPolicy: Always
     - display_name: "All Spark Environment"
       description: "Python, Scala, R, Spark Stack"
       kubespawner_override:
         image: jtandedocker/allspark-nbk:py-3.10.6-nbpuller
+        pullPolicy: Always
     - display_name: "Jupyter Notebook Deep Learning Stack"
       description: "Tensorflow"
       kubespawner_override:
         image: jtandedocker/tensorflow-nbk:py-3.10.6-nbpuller
-        lifecycleHooks:
-          postStart:
-            exec:
-              command:
-                [
-                  "gitpuller",
-                  "https://github.com/jtande/jhub-file-download",
-                  "SampleNoteBooks",
-                  "Examples", 
-                ]
+        pullPolicy: Always
+  lifecycleHooks:
+    postStart:
+      exec:
+        command:
+          [
+            "gitpuller",
+            "https://github.com/jtande/jhub-file-download",
+            "SampleNoteBooks",
+            "Examples", 
+          ]
   # `cmd: null` allows the custom CMD of the Jupyter docker-stacks to be used
   # which performs further customization on startup.
   cmd: null
@@ -67,11 +70,51 @@ hub:
         - j_fossot
 #        - adminuser2
     GoogleOAuthenticator:
-      client_id: your-client-id.apps.googleusercontent.com
-      client_secret: your-client-secret
-      oauth_callback_url: https://your-jupyterhub-domain/hub/oauth_callback
+      client_id: 323833036253-fp9rri1tbptptd9h1j8uu70fmh84c0sn.apps.googleusercontent.com
+      client_secret: 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
+      oauth_callback_url: https://jhub-dev.eastus.cloudapp.azure.com/hub/oauth_callback
       hosted_domain:
         - uncg.edu
       login_service: iSPARTAN
     JupyterHub:
       authenticator_class: google
+
+############### Custom login page ###########
+
+  initContainers:
+    - name: git-clone-templates
+      image: alpine/git
+      args:
+        - clone
+        - --single-branch
+        - --branch=sp-ism210
+        - --depth=1
+        - --
+        - https://github.com/jtande/jupyterhub.git
+        - /etc/jupyterhub/custom
+      securityContext:
+        runAsUser: 0
+      volumeMounts:
+        - name: custom-templates
+          mountPath: /etc/jupyterhub/custom
+  extraVolumes:
+    - name: custom-templates
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: custom-templates
+      mountPath: /etc/jupyterhub/custom
+  extraConfig:
+    templates: |
+      c.JupyterHub.template_paths = ['/etc/jupyterhub/custom/templates']
+    jupyterlab: |
+      c.Spawner.cmd = ['jupyter-labhub']
+
+
+################### Automatic HTTPS Service ########
+proxy:
+  https:
+    enabled: true
+    hosts:
+      - jhub-dev.eastus.cloudapp.azure.com
+    letsencrypt:
+      contactEmail: j_fossot@uncg.edu

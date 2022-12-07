@@ -1,0 +1,576 @@
+{% extends "page.html" %}
+{% if announcement_login %}
+  {% set announcement = announcement_login %}
+{% endif %}
+
+{% block login_widget %}
+{% endblock %}
+
+{% block main %}
+
+{% block login %}
+<div id="login-main" class="container">
+{% if custom_html %}
+{{ custom_html | safe }}
+{% elif login_service %}
+
+<!-- Start customization here -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+    box-sizing: border-box;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+.header {
+    background-color: #000033;
+    <!--background-color: #F37524;-->
+    color: #ffffff;
+    padding: 15px;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    padding: 8px;
+    margin-bottom: 7px;
+    <!-- background-color: #33b5e5; -->
+    background-color: #FFDF00;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.menu li:hover {
+    background-color: #FFDF00;
+    <!--background-color: #0099cc; -->
+}
+/* Red border */
+hr.new1 {
+  border-top: 1px solid red;
+}
+
+/* Dashed red border */
+hr.new2 {
+  border-top: 1px dashed red;
+}
+
+/* Dotted red border */
+hr.new3 {
+  border-top: 1px dotted red;
+}
+
+/* Thick red border */
+hr.new4 {
+  border: 1px solid red;
+}
+
+/* Large rounded green border */
+hr.new5 {
+  border: 10px solid green;
+  border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <!--<h1>JupyterHub @ UNC-Greensboro</h1> -->
+<a href="https://imgur.com/Jr5ZiSh"><img src="https://i.imgur.com/Jr5ZiSh.png" hight="50" title="source: imgur.com" /></a>
+ <!--  <img src="uncgreensboro_v_tag_3-color.png" width="200"/> -->
+</div>
+
+<div class="row">
+
+ <div class="col-3"> <!-- login cell -->
+<!-- end first chunk here -->
+
+
+<div class="service-login">
+  <a role="button" class='btn btn-jupyter btn-lg' href='{{authenticator_login_url}}'>
+    Sign in with {{login_service}}
+  </a>
+</div>
+<!-- Start image addition here -->
+
+  <table>
+    <!-- R - logo    -->
+    <br>    </br>
+    <tr>
+     <!--  <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/Xp4u5N1"><img src="https://i.imgur.com/Xp4u5N1t.png" title="source: imgur.com" /></a>
+      </td>
+    </tr>
+    <!-- Jupyter - logo    -->
+    <tr>
+     <!-- <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/IO9hVbS"><img src="https://i.imgur.com/IO9hVbSt.jpg" title="source: imgur.com" /></a>
+      </td>
+    </tr>
+    <!-- Julia - logo   -->
+    <tr>
+     <!-- <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/V4QKkaz"><img src="https://i.imgur.com/V4QKkazt.png" title="source: imgur.com" /></a>
+      </td>
+    </tr>
+    <!-- Spark - logo   -->
+    <tr>
+      <!-- <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/23DlgSD"><img src="https://i.imgur.com/23DlgSDt.png" title="source: imgur.com" /></a>
+      </td>
+    </tr>
+    <!-- Tensorflow - logo   -->
+    <tr>
+      <!-- <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/hvOn05L"><img src="https://i.imgur.com/hvOn05Lt.png" title="source: imgur.com" /></a>
+      </td>
+    </tr>   
+  </table>
+
+  <!-- End image addition here -->
+
+<!-- Start second chunk here -->
+</div> <!-- cell -->
+
+<div class="col-9">
+  <H2>Welcome to the UNCG JupyterHub!</H2>
+
+  <p> Login to JupyterHub using your <b>iSpartan ID</b>. If you would
+    need assistance, please visit <a href="https://uncg.service-now.com/support">6-TECH Online</a> to make a request.</p>
+
+  <H3>Useful Links</H3>
+
+  <ul>
+    <li><a href="https://jupyterlab.readthedocs.io/en/latest/">JupyterLab users manual</a></li>
+    <li><a href="https://jupyter.org/documentation">Learn more about the Jupyter project</a></li>
+    <li><a href="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks">A gallery of interesting Jupyter Notebooks</a></li>
+  </ul>
+
+  <h3>News</h3>
+  <ul>
+    <li>New JupyterHub running on Kubernete cluster configured for teaching and research!</li>
+  </ul>
+  <h3>Disclaimer</h3>
+  <ul>
+    <li>Data on JupyterHub is not backed up. Please keep copies of your data and notebooks</li>
+    <li>JupyterHub has a 5GB data size limit per user</li>
+  </ul>
+  <H3>FAQs</H3>
+  <hr class="new1">
+  <H4>What is a Jupyter Notebook? </H4>
+  <p>
+    Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code,
+    equations, visualizations and narrative text. Uses include: data cleaning and transformation, numerical simulation,
+    statistical modeling, data visualization, machine learning, and much more.
+  </p>
+  <hr class="new1">
+  <H4>What is a JupyterHub? </H4>
+  <p>
+    JupyterHub brings the power of notebooks to groups of users. It gives users access to computational environments and
+    resources without burdening the users with installation and maintenance tasks. Users - including students, researchers,
+    and data scientists - can get their work done in their own workspaces on shared resources which can be managed efficiently
+    by system administrators. 
+  </p>
+  <hr class="new1">
+  <H4>Who can use this service? </H4>
+  <p>
+    This JupyterHub service is open to UNCG instructors and students; as this is an open service, students should
+    ensure they are backing up their notebooks regularly if they are using this service for course activities. 
+  </p>
+  <hr class="new1">
+  <H4>How do I distribute course content to students? </H4>
+  <p>
+    We recommend using <a href="https://jupyterhub.github.io/nbgitpuller/">nbgitpuller</a> to distribute content to students.
+    You can construct a <a href="https://jupyterhub.github.io/nbgitpuller/link">nbgitpuller</a> link, and
+    send it to your students. When they click it, the course content will be pulled into their home directories,
+    and the appropriate file will be opened. 
+  </p>
+  <hr class="new1">
+  <H4>Can I install my own packages?</H4>
+  <p>
+    Yes, you can! In a Jupyter Notebook, you can use <a style="color:red">!pip install package-name</a> to install a Python package.
+    With R, you can use <a style="color:red">install.packages()</a>. To prevent individual user environments diverging from each
+    other too much, your user installed packages only last the length of your server. So we recommend putting those package
+    installation lines in the beginning of the notebook/file that you are using, so it can be run each time as necessary. 
+  </p>
+  <hr class="new1">
+ 
+  <H3>Administration</H3>
+  <ul>
+    <li><p>To use JupyterHub, in your course, please visit
+	<a href="https://uncg.service-now.com/support">6-TECH Online</a> to open a request.
+      </p>
+    </li>
+    <li><p>UNCG JupyterHub is a <a href="https://cci-lab.uncg.edu/about-the-cci-lab/">CCI Lab project.</a>
+      </p>
+    </li>
+    <li><p>Are you a student interested in working on the project? Make a request at<a href="https://uncg.service-now.com/support"> 6-TECH Online</a>  
+      </p>
+    </li>
+  </ul>
+
+<p>Funding, for equipment and development, provided by:</p>
+
+<table>
+  <!-- UNCG Logo -->
+  <tr>
+    <td bgcolor="#000033">
+      <a href="https://imgur.com/K8RsDH9"><img src="https://i.imgur.com/K8RsDH9.jpg" title="source: imgur.com" /></a>
+    </td>
+  </tr>
+</table>
+
+</div> <!-- 2nd column -->
+</div> <!-- row -->
+</body>
+</html>
+<!-- End second chunk here -->
+
+
+{% else %}
+
+<!--  Start first customization for unsecured login here -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+    box-sizing: border-box;
+}
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+.header {
+    background-color: #000033;
+    <!--background-color: #F37524;-->
+    color: #ffffff;
+    padding: 15px;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    padding: 8px;
+    margin-bottom: 7px;
+    <!-- background-color: #33b5e5; -->
+    background-color: #FFDF00;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.menu li:hover {
+    background-color: #FFDF00;
+    <!--background-color: #0099cc; -->
+}
+/* Red border */
+hr.new1 {
+  border-top: 1px solid red;
+}
+
+/* Dashed red border */
+hr.new2 {
+  border-top: 1px dashed red;
+}
+
+/* Dotted red border */
+hr.new3 {
+  border-top: 1px dotted red;
+}
+
+/* Thick red border */
+hr.new4 {
+  border: 1px solid red;
+}
+
+/* Large rounded green border */
+hr.new5 {
+  border: 10px solid green;
+  border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <!--<h1>JupyterHub @ UNC-Greensboro</h1> -->
+<a href="https://imgur.com/Jr5ZiSh"><img src="https://i.imgur.com/Jr5ZiSh.png" hight="50" title="source: imgur.com" /></a>
+ <!--  <img src="uncgreensboro_v_tag_3-color.png" width="200"/> -->
+</div>
+
+<div class="row">
+
+  <div class="col-3"> <!-- login cell -->
+
+<!-- end first customization for unsecured login  -->
+
+<form action="{{login_url}}?next={{next}}" method="post" role="form">
+  <div class="auth-form-header">
+    Sign in
+  </div>
+  <div class='auth-form-body'>
+
+    <p id='insecure-login-warning' class='hidden'>
+    Warning: JupyterHub seems to be served over an unsecured HTTP connection.
+    We strongly recommend enabling HTTPS for JupyterHub.
+    </p>
+
+    {% if login_error %}
+    <p class="login_error">
+      {{login_error}}
+    </p>
+    {% endif %}
+    <label for="username_input">Username:</label>
+    <input
+      id="username_input"
+      type="text"
+      autocapitalize="off"
+      autocorrect="off"
+      class="form-control"
+      name="username"
+      val="{{username}}"
+      tabindex="1"
+      autofocus="autofocus"
+    />
+    <label for='password_input'>Password:</label>
+    <input
+      type="password"
+      class="form-control"
+      name="password"
+      id="password_input"
+      tabindex="2"
+    />
+
+    <div class="feedback-container">
+      <input
+        id="login_submit"
+        type="submit"
+        class='btn btn-jupyter'
+        value='Sign in'
+        tabindex="3"
+        />
+      <div class="feedback-widget hidden">
+        <i class="fa fa-spinner"></i>
+      </div>
+    </div>
+
+    {% block login_terms %}
+    {% if login_term_url %}
+    <div id="login_terms" class="login_terms">
+    <input type="checkbox" id="login_terms_checkbox" name="login_terms_checkbox" required />
+    {% block login_terms_text %} {# allow overriding the text #}
+    By logging into the platform you accept the <a href="{{ login_term_url }}">terms and conditions</a>.
+    {% endblock login_terms_text %}
+    </div>
+    {% endif %}
+    {% endblock login_terms %}
+    
+    
+  </div>
+</form>
+ <!-- Start image addition here -->
+
+  <table>
+    <!-- R - logo    -->
+    <br>    </br>
+    <tr>
+     <!--  <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/Xp4u5N1"><img src="https://i.imgur.com/Xp4u5N1t.png" title="source: imgur.com" /></a>
+      </td>
+    </tr>
+    <!-- Jupyter - logo    -->
+    <tr>
+     <!-- <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/IO9hVbS"><img src="https://i.imgur.com/IO9hVbSt.jpg" title="source: imgur.com" /></a>
+      </td>
+    </tr>
+    <!-- Julia - logo   -->
+    <tr>
+     <!-- <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/V4QKkaz"><img src="https://i.imgur.com/V4QKkazt.png" title="source: imgur.com" /></a>
+      </td>
+    </tr>
+    <!-- Spark - logo   -->
+    <tr>
+      <!-- <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/23DlgSD"><img src="https://i.imgur.com/23DlgSDt.png" title="source: imgur.com" /></a>
+      </td>
+    </tr>
+    <!-- Tensorflow - logo   -->
+    <tr>
+      <!-- <td bgcolor="#000033"> -->
+	<a href="https://imgur.com/hvOn05L"><img src="https://i.imgur.com/hvOn05Lt.png" title="source: imgur.com" /></a>
+      </td>
+    </tr>   
+  </table>
+  <!-- End image addition here -->
+
+<!-- Start second instance of unsecured login -->
+</div> <!-- cell -->
+
+<div class="col-9">
+  <H2>Welcome to the UNCG JupyterHub!</H2>
+
+  <p> Login to JupyterHub using your iSpartan ID. If you would
+    need assistance, please visit <a href="https://uncg.service-now.com/support">6-TECH Online</a> to open a request.</p>
+
+  <H3>Useful Links</H3>
+
+  <ul>
+    <li><a href="https://jupyterlab.readthedocs.io/en/latest/">JupyterLab users manual</a></li>
+    <li><a href="https://jupyter.org/documentation">Learn more about the Jupyter project</a></li>
+     <li><a href="https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks">A gallery of interesting Jupyter Notebooks</a></li>
+  </ul>
+
+  <h3>News</h3>
+  <ul>
+    <li>New JupyterHub running on Kubernete cluster configured for teaching and research!</li>
+  </ul>
+  <h3>Disclaimer</h3>
+  <ul>
+    <li>Data on JupyterHub is not backed up. Please keep copies of your data and notebooks</li>
+    <li>JupyterHub has a 5GB data size limit per user</li>
+  </ul>
+  <H3>FAQs</H3>
+  <hr class="new1">
+  <H4>What is a Jupyter Notebook? </H4>
+  <p>
+    Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code,
+    equations, visualizations and narrative text. Uses include: data cleaning and transformation, numerical simulation,
+    statistical modeling, data visualization, machine learning, and much more.
+  </p>
+  <hr class="new1">
+  <H4>What is a JupyterHub? </H4>
+  <p>
+    JupyterHub brings the power of notebooks to groups of users. It gives users access to computational environments and
+    resources without burdening the users with installation and maintenance tasks. Users - including students, researchers,
+    and data scientists - can get their work done in their own workspaces on shared resources which can be managed efficiently
+    by system administrators. 
+  </p>
+  <hr class="new1">
+  <H4>Who can use this service? </H4>
+  <p>
+    This JupyterHub service is open to UNCG instructors and students; as this is an open service, students should
+    ensure they are backing up their notebooks regularly if they are using this service for course activities. 
+  </p>
+  <hr class="new1">
+  <H4>How do I distribute course content to students? </H4>
+  <p>
+    We recommend using <a href="https://jupyterhub.github.io/nbgitpuller/">nbgitpuller</a> to distribute content to students.
+    You can construct a <a href="https://jupyterhub.github.io/nbgitpuller/link">nbgitpuller</a> link, and
+    send it to your students. When they click it, the course content will be pulled into their home directories,
+    and the appropriate file will be opened. 
+  </p>
+  <hr class="new1">
+  <H4>Can I install my own packages?</H4>
+  <p>
+    Yes, you can! In a Jupyter Notebook, you can use <a style="color:red">!pip install package-name</a> to install
+    a Python package. With R, you can use <a style="color:red">install.packages()</a>. To prevent individual user environments diverging from each
+    other too much, your user installed packages only last the length of your server. So we recommend putting those package
+    installation lines in the beginning of the notebook / file that you are using, so it can be run each time as necessary. 
+  </p>
+  <hr class="new1">
+ 
+  <H4>Administration</H4>
+  <ul>
+    <li><p>To use JupyterHub, in your course, please visit
+	<a href="https://uncg.service-now.com/support">6-TECH Online</a> to open a request.
+      </p>
+    </li>
+    <li><p>UNCG JupyterHub is a <a href="https://cci-lab.uncg.edu/about-the-cci-lab/">CCI Lab project.</a>
+      </p>
+    </li>
+    <li><p>Are you a student interested in working on the project? Make a request at<a href="https://uncg.service-now.com/support"> 6-TECH Online</a>  
+      </p>
+    </li>
+  </ul>
+
+<p>Funding, for equipment and development, provided by:</p>
+
+<table>
+  <!-- UNCG Logo -->
+  <tr>
+    <td bgcolor="#000033">
+      <a href="https://imgur.com/K8RsDH9"><img src="https://i.imgur.com/K8RsDH9.jpg" title="source: imgur.com" /></a>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+</div> <!-- row -->
+</body>
+</html>
+
+<!-- end second instance of unsecured login customization here -->
+
+{% endif %}
+</div>
+{% endblock login %}
+
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+if (window.location.protocol === "http:") {
+  // unhide http warning
+  var warning = document.getElementById('insecure-login-warning');
+  warning.className = warning.className.replace(/\bhidden\b/, '');
+}
+// setup onSubmit feedback
+$('form').submit((e) => {
+  var form = $(e.target);
+  form.find('.feedback-container>input').attr('disabled', true);
+  form.find('.feedback-container>*').toggleClass('hidden');
+  form.find('.feedback-widget>*').toggleClass('fa-pulse');
+});
+</script>
+{% endblock %}

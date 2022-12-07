@@ -1,2 +1,4 @@
 # ignore emacs backup files
 *~
+*.zip
+*.tar
