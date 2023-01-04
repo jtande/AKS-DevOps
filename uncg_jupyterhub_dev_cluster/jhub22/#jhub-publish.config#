@@ -1,0 +1,124 @@
+# This file can update the JupyterHub Helm chart's default configuration values.
+#
+# For reference see the configuration reference and default values, but make
+# sure to refer to the Helm chart version of interest to you!
+#
+# Introduction to YAML:     https://www.youtube.com/watch?v=cdLNKUoMc6c
+# Chart config reference:   https://zero-to-jupyterhub.readthedocs.io/en/stable/resources/reference.html
+# Chart default values:     https://github.com/jupyterhub/zero-to-jupyterhub-k8s/blob/HEAD/jupyterhub/values.yaml
+# Available chart versions: https://jupyterhub.github.io/helm-chart/
+#
+#docker pull jtandedocker/min-nbk:py-3.10.6-nbpuller
+
+########################################################################
+##                  edited yaml file for publication                  ##
+########################################################################
+singleuser:
+  # Defines the default image
+  image:
+    name: jtandedocker/min-nbk
+    tag: py-3.10.6-nbpuller
+    pullPolicy: Always
+  profileList:
+    - display_name: "Minimal Environment"
+      description: "Jupyter Notebook with Python."
+      default: true
+    - display_name: "Datascience Environment"
+      description: "SciPython, R, and Julia."
+      kubespawner_override:
+        image: jtandedocker/datascience-nbk:py-3.10.6-nbpuller
+        pullPolicy: Always
+    - display_name: "All Spark Environment"
+      description: "Python, Scala, R, Spark Stack"
+      kubespawner_override:
+        image: jtandedocker/allspark-nbk:py-3.10.6-nbpuller
+        pullPolicy: Always
+    - display_name: "Jupyter Notebook Deep Learning Stack"
+      description: "Tensorflow"
+      kubespawner_override:
+        image: jtandedocker/tensorflow-nbk:py-3.10.6-nbpuller
+        pullPolicy: Always
+  lifecycleHooks:
+    postStart:
+      exec:
+        command:
+          [
+            "gitpuller",
+            "https://github.com/jtande/jhub-file-download",
+            "SampleNoteBooks",
+            "Examples", 
+          ]
+  # `cmd: null` allows the custom CMD of the Jupyter docker-stacks to be used
+  # which performs further customization on startup.
+  cmd: null
+  #
+  # JupyterLab as the default UI
+  defaultUrl: "/lab"
+  extraEnv:
+    JUPYTERHUB_SINGLEUSER_APP: "jupyter_server.serverapp.ServerApp"
+    EDITOR: "vim"
+  memory:
+    limit: 1G
+#    guarantee: 1G
+  cpu:
+    limit: .5
+    guarantee: .5
+  storage:
+    capacity: 4Gi   
+
+######### Define the hub  ################
+hub:
+  config:
+    Authenticator:
+      admin_users:
+        - j_fossot
+#        - adminuser2
+    GoogleOAuthenticator:
+      client_id: <get client id from google developers consol>
+      client_secret: <get client  from google developers consol>
+      oauth_callback_url: https://jhub-dev.eastus.cloudapp.azure.com/hub/oauth_callback
+      hosted_domain:
+        - uncg.edu
+      login_service: iSPARTAN
+    JupyterHub:
+      authenticator_class: google
+
+############### Custom login page ###########
+
+  initContainers:
+    - name: git-clone-templates
+      image: alpine/git
+      args:
+        - clone
+        - --single-branch
+        - --branch=sp-ism210
+        - --depth=1
+        - --
+        - https://github.com/jtande/jupyterhub.git
+        - /etc/jupyterhub/custom
+      securityContext:
+        runAsUser: 0
+      volumeMounts:
+        - name: custom-templates
+          mountPath: /etc/jupyterhub/custom
+  extraVolumes:
+    - name: custom-templates
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: custom-templates
+      mountPath: /etc/jupyterhub/custom
+  extraConfig:
+    templates: |
+      c.JupyterHub.template_paths = ['/etc/jupyterhub/custom/templates']
+    jupyterlab: |
+      c.Spawner.cmd = ['jupyter-labhub']
+
+
+################### Automatic HTTPS Service ########
+proxy:
+  https:
+    enabled: true
+    hosts:
+      - jhub-dev.eastus.cloudapp.azure.com
+    letsencrypt:
+      contactEmail: j_fossot@uncg.edu

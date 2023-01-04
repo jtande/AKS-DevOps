@@ -17,8 +17,10 @@
 echo " Setting up variable "
 echo "         "
 SubscriptionName="CCI Lab"
-ResourceGroupName=RG_DevCluster
-ClusterName=devclusters
+#ResourceGroupName=RG_DevCluster
+#ClusterName=devclusters
+ResourceGroupName=KubeAthena2021
+ClusterName=KubeAthena
 
 #az account set --subscription 5d977988-ecf6-4742-96f3-b60460b6a035
 #az aks get-credentials --resource-group RG_DevCluster --name devcluster
